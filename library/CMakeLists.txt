@@ -1,0 +1,38 @@
+ADD_LIBRARY( library SHARED )
+TARGET_SOURCES( library PRIVATE "src/library.cpp" )
+TARGET_INCLUDE_DIRECTORIES( library
+    PUBLIC
+        "$<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include/>"
+        "$<INSTALL_INTERFACE:${CMAKE_INSTALL_INCLUDEDIR}>"
+)
+INSTALL(
+    DIRECTORY "include/"
+    DESTINATION "${CMAKE_INSTALL_INCLUDEDIR}"
+    COMPONENT public-headers
+    EXCLUDE_FROM_ALL
+)
+
+# INSTALL(
+#     TARGETS library
+#     EXPORT "CPackMultiConfigConfig"
+#     LIBRARY
+#         DESTINATION "${CMAKE_INSTALL_LIBDIR}"
+#         CONFIGURATIONS Release
+#         COMPONENT libraries-release
+#     LIBRARY
+#         DESTINATION "${CMAKE_INSTALL_LIBDIR}"
+#         CONFIGURATIONS Debug
+#         COMPONENT libraries-debug
+# )
+INSTALL(
+    TARGETS library
+    CONFIGURATIONS Release
+    COMPONENT libraries-release
+    RUNTIME DESTINATION "${CMAKE_INSTALL_LIBDIR}"
+)
+INSTALL(
+    TARGETS library
+    CONFIGURATIONS Debug
+    COMPONENT libraries-debug
+    RUNTIME DESTINATION "${CMAKE_INSTALL_LIBDIR}"
+)
