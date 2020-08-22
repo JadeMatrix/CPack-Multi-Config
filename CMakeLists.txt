@@ -25,11 +25,32 @@ INSTALL(
     DESTINATION "${CMAKE_INSTALL_LIBDIR}/cmake/CPackMultiConfig/"
     COMPONENT cmake-configs
 )
+# INSTALL(
+#     EXPORT "CPackMultiConfigConfig"
+#     NAMESPACE "CPackMultiConfig::"
+#     DESTINATION "${CMAKE_INSTALL_LIBDIR}/cmake/CPackMultiConfig/"
+#     COMPONENT cmake-configs
+# )
 INSTALL(
     EXPORT "CPackMultiConfigConfig"
+    # EXPORT "CPackMultiConfigConfig-release"
+    # FILE "CPackMultiConfigConfig-release.cmake"
     NAMESPACE "CPackMultiConfig::"
     DESTINATION "${CMAKE_INSTALL_LIBDIR}/cmake/CPackMultiConfig/"
+    CONFIGURATIONS Release
+    # COMPONENT release
+    # COMPONENT cmake-configs-release
     COMPONENT cmake-configs
+)
+INSTALL(
+    EXPORT "CPackMultiConfigConfig-debug"
+    # FILE "CPackMultiConfigConfig-debug.cmake"
+    FILE "CPackMultiConfigConfig.cmake"
+    NAMESPACE "CPackMultiConfig::"
+    DESTINATION "${CMAKE_INSTALL_LIBDIR}/cmake/CPackMultiConfig/"
+    CONFIGURATIONS Debug
+    COMPONENT debug
+    # COMPONENT cmake-configs-debug
 )
 # EXPORT( EXPORT "CPackMultiConfigConfig" FILE "CPackMultiConfigConfig.cmake" )
 
@@ -59,17 +80,23 @@ CPACK_ADD_COMPONENT_GROUP(
 )
 
 CPACK_ADD_COMPONENT(
-    executables-release
-    DISPLAY_NAME "Executables (release)"
+    #[[executables-]] release
+    DISPLAY_NAME "Release binaries"
     REQUIRED
     GROUP release
 )
-CPACK_ADD_COMPONENT(
-    libraries-release
-    DISPLAY_NAME "Libraries (release)"
-    REQUIRED
-    GROUP release
-)
+# CPACK_ADD_COMPONENT(
+#     executables-release
+#     DISPLAY_NAME "Executables (release)"
+#     REQUIRED
+#     GROUP release
+# )
+# CPACK_ADD_COMPONENT(
+#     libraries-release
+#     DISPLAY_NAME "Libraries (release)"
+#     REQUIRED
+#     GROUP release
+# )
 
 CPACK_ADD_COMPONENT(
     public-headers
@@ -83,16 +110,34 @@ CPACK_ADD_COMPONENT(
     REQUIRED
     GROUP devel
 )
+# CPACK_ADD_COMPONENT(
+#     cmake-configs-release
+#     DISPLAY_NAME "CMake package configuration"
+#     REQUIRED
+#     GROUP devel
+# )
 
 CPACK_ADD_COMPONENT(
-    executables-debug
-    DISPLAY_NAME "Executables (debug)"
+    #[[executables-]] debug
+    DISPLAY_NAME "Debug binaries"
     REQUIRED
     GROUP debug
 )
-CPACK_ADD_COMPONENT(
-    libraries-debug
-    DISPLAY_NAME "Libraries (debug)"
-    REQUIRED
-    GROUP debug
-)
+# CPACK_ADD_COMPONENT(
+#     executables-debug
+#     DISPLAY_NAME "Executables (debug)"
+#     REQUIRED
+#     GROUP debug
+# )
+# CPACK_ADD_COMPONENT(
+#     libraries-debug
+#     DISPLAY_NAME "Libraries (debug)"
+#     REQUIRED
+#     GROUP debug
+# )
+# CPACK_ADD_COMPONENT(
+#     cmake-configs-debug
+#     DISPLAY_NAME "CMake package configuration"
+#     REQUIRED
+#     GROUP devel
+# )
