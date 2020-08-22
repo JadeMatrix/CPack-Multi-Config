@@ -25,38 +25,26 @@ INSTALL(
     DESTINATION "${CMAKE_INSTALL_LIBDIR}/cmake/CPackMultiConfig/"
     COMPONENT cmake-configs
 )
-# INSTALL(
-#     EXPORT "CPackMultiConfigConfig"
-#     NAMESPACE "CPackMultiConfig::"
-#     DESTINATION "${CMAKE_INSTALL_LIBDIR}/cmake/CPackMultiConfig/"
-#     COMPONENT cmake-configs
-# )
 INSTALL(
     EXPORT "CPackMultiConfigConfig"
-    # EXPORT "CPackMultiConfigConfig-release"
-    # FILE "CPackMultiConfigConfig-release.cmake"
     NAMESPACE "CPackMultiConfig::"
     DESTINATION "${CMAKE_INSTALL_LIBDIR}/cmake/CPackMultiConfig/"
     CONFIGURATIONS Release
-    # COMPONENT release
-    # COMPONENT cmake-configs-release
-    COMPONENT cmake-configs
+    COMPONENT cmake-configs #[[-release]]
 )
 INSTALL(
     EXPORT "CPackMultiConfigConfig-debug"
-    # FILE "CPackMultiConfigConfig-debug.cmake"
     FILE "CPackMultiConfigConfig.cmake"
     NAMESPACE "CPackMultiConfig::"
     DESTINATION "${CMAKE_INSTALL_LIBDIR}/cmake/CPackMultiConfig/"
     CONFIGURATIONS Debug
-    COMPONENT debug
-    # COMPONENT cmake-configs-debug
+    COMPONENT #[[cmake-configs-]] debug
 )
 # EXPORT( EXPORT "CPackMultiConfigConfig" FILE "CPackMultiConfigConfig.cmake" )
 
 
 SET( CPACK_VERBATIM_VARIABLES TRUE )
-SET( CPACK_GENERATOR "TGZ" )
+SET( CPACK_GENERATOR "TGZ" CACHE STRING "CPack generators" )
 SET( CPACK_BUILD_CONFIG ${CMAKE_CONFIGURATION_TYPES} )
 
 SET( CPACK_ARCHIVE_COMPONENT_INSTALL ON )
@@ -80,23 +68,17 @@ CPACK_ADD_COMPONENT_GROUP(
 )
 
 CPACK_ADD_COMPONENT(
-    #[[executables-]] release
-    DISPLAY_NAME "Release binaries"
+    executables-release
+    DISPLAY_NAME "Executables (release)"
     REQUIRED
     GROUP release
 )
-# CPACK_ADD_COMPONENT(
-#     executables-release
-#     DISPLAY_NAME "Executables (release)"
-#     REQUIRED
-#     GROUP release
-# )
-# CPACK_ADD_COMPONENT(
-#     libraries-release
-#     DISPLAY_NAME "Libraries (release)"
-#     REQUIRED
-#     GROUP release
-# )
+CPACK_ADD_COMPONENT(
+    libraries-release
+    DISPLAY_NAME "Libraries (release)"
+    REQUIRED
+    GROUP release
+)
 
 CPACK_ADD_COMPONENT(
     public-headers
@@ -105,17 +87,11 @@ CPACK_ADD_COMPONENT(
     GROUP devel
 )
 CPACK_ADD_COMPONENT(
-    cmake-configs
+    cmake-configs #[[-release]]
     DISPLAY_NAME "CMake package configuration"
     REQUIRED
     GROUP devel
 )
-# CPACK_ADD_COMPONENT(
-#     cmake-configs-release
-#     DISPLAY_NAME "CMake package configuration"
-#     REQUIRED
-#     GROUP devel
-# )
 
 CPACK_ADD_COMPONENT(
     #[[executables-]] debug

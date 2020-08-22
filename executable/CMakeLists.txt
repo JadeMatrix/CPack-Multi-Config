@@ -7,30 +7,16 @@ SET_TARGET_PROPERTIES(
         DEBUG_POSTFIX "-debug"
 )
 
-# INSTALL(
-#     TARGETS executable
-#     EXPORT "CPackMultiConfigConfig"
-#     RUNTIME
-#         DESTINATION "${CMAKE_INSTALL_BINDIR}"
-#         CONFIGURATIONS Release
-#         COMPONENT executables-release
-#     RUNTIME
-#         DESTINATION "${CMAKE_INSTALL_BINDIR}"
-#         CONFIGURATIONS Debug
-#         COMPONENT executables-debug
-# )
 INSTALL(
     TARGETS executable
-    # EXPORT "CPackMultiConfigConfig-release"
     EXPORT "CPackMultiConfigConfig"
     CONFIGURATIONS Release
-    COMPONENT #[[executables-]] release
+    COMPONENT executables-release
     RUNTIME DESTINATION "${CMAKE_INSTALL_BINDIR}"
 )
 INSTALL(
     TARGETS executable
     EXPORT "CPackMultiConfigConfig-debug"
-    # EXPORT "CPackMultiConfigConfig"
     CONFIGURATIONS Debug
     COMPONENT #[[executables-]] debug
     RUNTIME DESTINATION "${CMAKE_INSTALL_BINDIR}/"
