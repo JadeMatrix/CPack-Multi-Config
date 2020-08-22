@@ -12,27 +12,27 @@ INSTALL(
     EXCLUDE_FROM_ALL
 )
 
+INSTALL(
+    TARGETS library
+    EXPORT "CPackMultiConfigConfig"
+    LIBRARY
+        DESTINATION "${CMAKE_INSTALL_LIBDIR}"
+        CONFIGURATIONS Release
+        COMPONENT libraries-release
+    LIBRARY
+        DESTINATION "${CMAKE_INSTALL_LIBDIR}"
+        CONFIGURATIONS Debug
+        COMPONENT libraries-debug
+)
 # INSTALL(
 #     TARGETS library
-#     EXPORT "CPackMultiConfigConfig"
-#     LIBRARY
-#         DESTINATION "${CMAKE_INSTALL_LIBDIR}"
-#         CONFIGURATIONS Release
-#         COMPONENT libraries-release
-#     LIBRARY
-#         DESTINATION "${CMAKE_INSTALL_LIBDIR}"
-#         CONFIGURATIONS Debug
-#         COMPONENT libraries-debug
+#     CONFIGURATIONS Release
+#     COMPONENT libraries-release
+#     RUNTIME DESTINATION "${CMAKE_INSTALL_LIBDIR}"
 # )
-INSTALL(
-    TARGETS library
-    CONFIGURATIONS Release
-    COMPONENT libraries-release
-    RUNTIME DESTINATION "${CMAKE_INSTALL_LIBDIR}"
-)
-INSTALL(
-    TARGETS library
-    CONFIGURATIONS Debug
-    COMPONENT libraries-debug
-    RUNTIME DESTINATION "${CMAKE_INSTALL_LIBDIR}"
-)
+# INSTALL(
+#     TARGETS library
+#     CONFIGURATIONS Debug
+#     COMPONENT libraries-debug
+#     RUNTIME DESTINATION "${CMAKE_INSTALL_LIBDIR}"
+# )

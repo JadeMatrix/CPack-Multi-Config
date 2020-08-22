@@ -15,22 +15,22 @@ ADD_SUBDIRECTORY( "executable/" )
 ADD_SUBDIRECTORY( "library/"    )
 
 
-# INCLUDE( CMakePackageConfigHelpers )
-# WRITE_BASIC_PACKAGE_VERSION_FILE(
-#     "${PROJECT_BINARY_DIR}/CPackMultiConfigConfigVersion.cmake"
-#     COMPATIBILITY AnyNewerVersion
-# )
-# INSTALL(
-#     FILES "${PROJECT_BINARY_DIR}/CPackMultiConfigConfigVersion.cmake"
-#     DESTINATION "${CMAKE_INSTALL_LIBDIR}/cmake/CPackMultiConfig/"
-#     COMPONENT cmake-configs
-# )
-# INSTALL(
-#     EXPORT "CPackMultiConfigConfig"
-#     NAMESPACE "CPackMultiConfig::"
-#     DESTINATION "${CMAKE_INSTALL_LIBDIR}/cmake/CPackMultiConfig/"
-#     COMPONENT cmake-configs
-# )
+INCLUDE( CMakePackageConfigHelpers )
+WRITE_BASIC_PACKAGE_VERSION_FILE(
+    "${PROJECT_BINARY_DIR}/CPackMultiConfigConfigVersion.cmake"
+    COMPATIBILITY AnyNewerVersion
+)
+INSTALL(
+    FILES "${PROJECT_BINARY_DIR}/CPackMultiConfigConfigVersion.cmake"
+    DESTINATION "${CMAKE_INSTALL_LIBDIR}/cmake/CPackMultiConfig/"
+    COMPONENT cmake-configs
+)
+INSTALL(
+    EXPORT "CPackMultiConfigConfig"
+    NAMESPACE "CPackMultiConfig::"
+    DESTINATION "${CMAKE_INSTALL_LIBDIR}/cmake/CPackMultiConfig/"
+    COMPONENT cmake-configs
+)
 # EXPORT( EXPORT "CPackMultiConfigConfig" FILE "CPackMultiConfigConfig.cmake" )
 
 
