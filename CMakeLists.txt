@@ -34,6 +34,13 @@ INSTALL(
 )
 INSTALL(
     EXPORT "CPackMultiConfigConfig-debug"
+    # Here is the hack to get CPack to separate out `<config>-debug.cmake` into
+    # the `debug` package.  Each target is installed exporting to the normal
+    # config under Release and some other "debug" config under Debug.  Then this
+    # other "debug" config gets installed with the same (base) filename as the
+    # Release config.  This results in a duplicate `<config>.cmake` file in the
+    # `debug` package, but the contents are the same as the one in the `devel`
+    # package.
     FILE "CPackMultiConfigConfig.cmake"
     NAMESPACE "CPackMultiConfig::"
     DESTINATION "${CMAKE_INSTALL_LIBDIR}/cmake/CPackMultiConfig/"
